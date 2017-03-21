@@ -1,0 +1,64 @@
+<!-- ft-create-connection-dialog element demo -->
+
+<!-- Imports -->
+<link rel="import" href="../../polymer/polymer.html">
+
+<link rel="import" href="../ft-create-connection-dialog.html">
+
+
+<!--
+
+An element that accepts username and password to connect to a document source.
+
+@demo demo/index.html
+ -->
+<dom-module id="demo-fixture">
+
+    <style include="iron-flex iron-flex-alignment"></style>
+
+    <template>
+
+        <div class="horizontal center-justified layout"
+                         style="width:100%; padding-left:16px; padding-right:16px;">
+
+            <div style="background:white; border:1px solid #DDD; display:inline-block">
+                <ft-create-connection-dialog id="dialog"></ft-create-connection-dialog>
+            </div>
+
+        </div>
+
+    </template>
+
+    <script>
+
+        Polymer
+        ({
+            is: 'demo-fixture',
+
+            properties:
+            {
+            },
+
+            ready: function()
+            {
+                var path = "source.json";
+
+                var xmlHttpRequest = new XMLHttpRequest();
+                xmlHttpRequest.overrideMimeType("application/json");
+                xmlHttpRequest.open('GET', path, true);
+                xmlHttpRequest.onreadystatechange = function()
+                {
+                    if (xmlHttpRequest.readyState == 4 &&
+                        xmlHttpRequest.status == "200")
+                    {
+                        dialog.source = JSON.parse(xmlHttpRequest.responseText);
+                    }
+                };
+                xmlHttpRequest.send();
+            }
+        });
+
+    </script>
+
+</dom-module>
+
