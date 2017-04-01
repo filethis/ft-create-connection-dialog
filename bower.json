@@ -1,6 +1,6 @@
 {
     "name": "ft-create-connection-dialog",
-    "version": "0.0.1",
+    "version": "0.0.3",
     "description": "An element that accepts username and password to connect to a document source.",
     "main": "ft-create-connection-dialog.html",
     "dependencies": {
