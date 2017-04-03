@@ -3,6 +3,8 @@
 <link rel="import" href="../iron-flex-layout/iron-flex-layout-classes.html">
 <link rel="import" href="../paper-button/paper-button.html">
 <link rel="import" href="../iron-label/iron-label.html">
+<link rel="import" href="../iron-a11y-keys-behavior/iron-a11y-keys-behavior.html">
+<link rel="import" href="../iron-a11y-keys/iron-a11y-keys.html">
 
 <!--
 `ft-create-connection-dialog`
@@ -89,6 +91,7 @@ An element that accepts username and password to connect to a document source.
 
                 <!-- Entry field -->
                 <input id="usernameField" is="iron-input"
+                       autofocus
                        on-keyup="_onKeyUp"
                        bind-value="{{username}}"
                        style="font-family:Arial;
@@ -292,6 +295,12 @@ An element that accepts username and password to connect to a document source.
             },
 
             ready: function()
+            {
+                this.initialize();
+            },
+
+            /** Call this when posing modally. */
+            initialize: function()
             {
                 this.username = "";
                 this.password = "";
