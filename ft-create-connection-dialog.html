@@ -212,25 +212,27 @@ An element that accepts username and password to connect to a document source.
             /**
              * Fired when the dialog is committed.
              *
-             * @event committed
+             * @event commit
+             * @param {Object} detail The selected connection.
              */
 
             /**
              * Fired when the dialog is canceled.
              *
-             * @event canceled
+             * @event cancel
              */
 
             /**
              * Fired when the "Visit Site" button is clicked.
              *
-             * @event visitSourceSite
+             * @event visit-source-site
+             * @param {Object} detail The source to be visited.
              */
 
             /**
              * Fired when the "Is this safe" button is clicked.
              *
-             * @event isThisSafe
+             * @event is-this-safe
              */
 
             properties: {
@@ -329,7 +331,7 @@ An element that accepts username and password to connect to a document source.
 
             _onCancelButtonClicked: function(event, detail)
             {
-                this.fire('cancel', this.source);
+                this.fire('cancel');
             },
 
             _onConnectButtonClicked: function(event, detail)
@@ -339,12 +341,12 @@ An element that accepts username and password to connect to a document source.
 
             _onVisitSourceSiteButtonClicked: function(event, detail)
             {
-                this.fire('visitSourceSite', this.source);
+                this.fire('visit-source-site', this.source);
             },
 
             _onIsThisSafeButtonClicked: function(event, detail)
             {
-                this.fire('isThisSafe', this.source);
+                this.fire('is-this-safe');
             },
 
             _getSourceLogoUrl: function(source)
