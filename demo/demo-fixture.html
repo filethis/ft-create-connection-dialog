@@ -19,6 +19,7 @@ limitations under the License.
 
 <!-- Imports -->
 <link rel="import" href="../../polymer/polymer.html">
+<link rel="import" href="../../paper-button/paper-button.html">
 
 <link rel="import" href="../ft-create-connection-dialog.html">
 
@@ -38,9 +39,15 @@ An element that accepts username and password to connect to a document source.
         <div class="horizontal center-justified layout"
                          style="width:100%; padding-left:16px; padding-right:16px;">
 
-            <div style="background:white; border:1px solid #DDD; display:inline-block">
-                <ft-create-connection-dialog id="dialog"></ft-create-connection-dialog>
-            </div>
+            <paper-button raised
+                          id="poseButton"
+                          style="font-family:Arial"
+                          on-click="_onPoseButtonClicked">
+                Pose Dialog
+            </paper-button>
+
+            <ft-create-connection-dialog id="dialog">
+            </ft-create-connection-dialog>
 
         </div>
 
@@ -58,6 +65,7 @@ An element that accepts username and password to connect to a document source.
 
             ready: function()
             {
+                // TODO: Refactor to use ft-http-behavior
                 var path = "source.json";
 
                 var xmlHttpRequest = new XMLHttpRequest();
@@ -65,14 +73,23 @@ An element that accepts username and password to connect to a document source.
                 xmlHttpRequest.open('GET', path, true);
                 xmlHttpRequest.onreadystatechange = function()
                 {
-                    if (xmlHttpRequest.readyState == 4 &&
-                        xmlHttpRequest.status == "200")
+                    if (xmlHttpRequest.readyState === 4 &&
+                        xmlHttpRequest.status === 200)
                     {
-                        dialog.source = JSON.parse(xmlHttpRequest.responseText);
+                        this.$.dialog.source = JSON.parse(xmlHttpRequest.responseText);
                     }
-                };
+                }.bind(this);
                 xmlHttpRequest.send();
+
+            },
+
+            _onPoseButtonClicked: function()
+            {
+                // Pose the modal dialog
+                var theDialog = this.$.dialog;
+                theDialog.open();
             }
+
         });
 
     </script>
