@@ -38,6 +38,12 @@ An element that accepts username and password to connect to a document source.
 
     <template>
 
+        <style>
+            :host {
+                display:block;
+            }
+        </style>
+
         <paper-dialog id="dialog"
                       modal
                       on-iron-overlay-closed="_onClosed"
