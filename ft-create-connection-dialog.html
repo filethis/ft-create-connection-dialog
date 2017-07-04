@@ -181,7 +181,7 @@ An element that accepts username and password to connect to a document source.
                     <paper-button dialog-dismiss raised
                                   id="cancelButton"
                                   style="font-family:Arial"
-                                  on-click="_onCancelButtonClicked">
+                                  on-tap="_onCancelButtonClicked">
                         Cancel
                     </paper-button>
 
@@ -193,7 +193,7 @@ An element that accepts username and password to connect to a document source.
                                   id="connectButton"
                                   disabled$="{{!isValid}}"
                                   style="font-family:Arial"
-                                  on-click="_onConnectButtonClicked">
+                                  on-tap="_onConnectButtonClicked">
                         Connect
                     </paper-button>
 
@@ -213,7 +213,7 @@ An element that accepts username and password to connect to a document source.
                                 color:#3B7FBA;
                                 cursor:pointer;
                                 "
-                         on-click="_onVisitSourceSiteButtonClicked">
+                         on-tap="_onVisitSourceSiteButtonClicked">
                         Visit {{_sourceName}} website
                     </div>
 
@@ -227,7 +227,7 @@ An element that accepts username and password to connect to a document source.
                                 color:#3B7FBA;
                                 cursor:pointer;"
                          hidden$="[[!showIsThisSafeButton]]"
-                         on-click="_onIsThisSafeButtonClicked">
+                         on-tap="_onIsThisSafeButtonClicked">
                         Is this safe?
                     </div>
                 </div>
