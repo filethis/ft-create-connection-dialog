@@ -372,7 +372,7 @@ An element that accepts username and password to connect to a document source.
                 // TODO: Generalize this
                 if (this.isValid)
                 {
-                    const enterKeyWasHit = (event.keyCode === 13);
+                    var enterKeyWasHit = (event.keyCode === 13);
                     if (enterKeyWasHit)
                     {
                         this.$.dialog.close();
