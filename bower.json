@@ -3,7 +3,7 @@
   "description": "An element that accepts username and password to connect to a document source.",
   "main": "ft-create-connection-dialog.html",
   "dependencies": {
-    "ft-element-demo": "filethis/ft-element-demo#^0.0.5",
+    "ft-element-demo": "filethis/ft-element-demo#^0.0.8",
     "iron-a11y-keys": "PolymerElements/iron-a11y-keys#1 - 2",
     "iron-input": "PolymerElements/iron-input#1 - 2",
     "iron-label": "PolymerElements/iron-label#1 - 2",
