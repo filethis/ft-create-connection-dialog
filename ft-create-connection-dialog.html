@@ -393,7 +393,7 @@ An element that accepts username and password to connect to a document source.
 
             _onCancelButtonClicked: function(event, detail)
             {
-                this.fire('cancel');
+                this.fire('cancel-command');
             },
 
             _onConnectButtonClicked: function(event, detail)
@@ -403,17 +403,17 @@ An element that accepts username and password to connect to a document source.
 
             _commit: function()
             {
-                this.fire('commit', this.source);
+                this.fire('create-connection-command', this);
             },
 
             _onVisitSourceSiteButtonClicked: function(event, detail)
             {
-                this.fire('visit-source-site', this.source);
+                this.fire('visit-source-site-command', this.source);
             },
 
             _onIsThisSafeButtonClicked: function(event, detail)
             {
-                this.fire('is-this-safe');
+                this.fire('is-this-safe-command');
             },
 
             _getSourceLogoUrl: function(source)
