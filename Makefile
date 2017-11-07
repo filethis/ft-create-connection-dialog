@@ -1,6 +1,6 @@
 # Project configuration
 NAME=ft-create-connection-dialog
-VERSION=0.0.21
+VERSION=0.0.22
 LOCAL_PORT=3033
 GITHUB_USER=filethis
 GITHUB_USER_ABBREV=ft
