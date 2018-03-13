@@ -22,6 +22,7 @@ limitations under the License.
 <link rel="import" href="../iron-label/iron-label.html">
 <link rel="import" href="../paper-button/paper-button.html">
 <link rel="import" href="../paper-dialog/paper-dialog.html">
+<link rel="import" href="../paper-input/paper-input.html">
 <link rel="import" href="../polymer/polymer.html">
 
 <!--
@@ -41,202 +42,185 @@ An element that accepts username and password to connect to a document source.
             :host {
                 display: block;
                 overflow: hidden;
+                font-family: Arial, Helvetica, sans-serif;
                 @apply --ft-create-connection-dialog;
+            }
+            .dialog {
+                width: 500px;
+                height: 400px;
+                @apply --ft-create-connection-dialog-dialog;
+            }
+            .content {
+                margin: 0;
+                padding: 0;
+                background-color: white;
+                width: 100%;
+                height: 100%;
+                @apply --ft-create-connection-dialog-dialog;
+            }
+            .prompt {
+                margin-top: 20px;
+                font-size: 13px;
+                font-style: italic;
+                color: #343434;
+                @apply --ft-create-connection-dialog-prompt;
+            }
+            .source-name {
+                margin-top: 10px;
+                font-size: 24px;
+                color: #343434;
+                @apply --ft-create-connection-dialog-source-name;
+            }
+            .logo-box {
+                margin-top: 10px;
+                width: 150px;
+                height: 65px;
+                border: 1px solid #DEDEDE;
+                @apply --ft-create-connection-dialog-logo-box;
+            }
+            .note {
+                margin-top: 9px;
+                font-size: 13px;
+                color: #7F7F7F;
+                display: none;
+                @apply --ft-create-connection-dialog-note;
+            }
+            .username-field {
+                margin-left: 0;
+                margin-top: 12px;
+                margin-right: 0;
+                margin-bottom: 0;
+                width: 350px;
+                padding: 0;
+                font-size: 15px;
+                color: #343434;
+                @apply --ft-create-connection-dialog-username-field;
+            }
+            .password-field {
+                margin: 0;
+                width: 350px;
+                padding: 0;
+                font-size: 15px;
+                color: #343434;
+                @apply --ft-create-connection-dialog-password-field;
+            }
+            .button-group {
+                margin-top: 20px;
+                width: 200px;
+                @apply --ft-create-connection-dialog-button-group;
+            }
+            .button {
+                @apply --ft-create-connection-dialog-button;
+            }
+            .info-link {
+                margin-top: 25px;
+                width: 350px;
+                font-size: 15px;
+                text-align: center;
+                color: #3B7FBA;
+                cursor:pointer;
+                @apply --ft-create-connection-dialog-info-link;
             }
         </style>
 
-        <paper-dialog id="dialog"
-                      modal
-                      on-iron-overlay-closed="_onClosed"
-                      style="width:630px; padding-left: 40px; padding-top: 12px; padding-right: 40px; padding-bottom: 5px;">
-
-            <!-- Center things -->
-            <div class="layout vertical center"
-                 style="width:450px;
-                        padding-left: 40px; padding-top: 12px; padding-right: 40px; padding-bottom: 5px;">
+        <paper-dialog
+            id="dialog"
+            class="dialog"
+            modal
+            on-iron-overlay-closed="_onClosed"
+        >
+            <!-- Content -->
+            <!-- Our paper-dialog parent is evil! It apparently injects a margin into its children -->
+            <!-- Or if the first child does not have a background color! -->
+            <!-- We use a "content" child with an explicitly empty margin to counteract this -->
+            <div class="content layout vertical center">
 
                 <!-- Prompt -->
-                <iron-label style="font-family:Arial;
-                                    font-size: 13px;
-                                    font-style:italic;
-                                    color: #343434;">
-                    Please enter your credentials for:
+                <iron-label class="prompt">
+                    Please enter your credentials for
                 </iron-label>
 
-                <!-- Spacer -->
-                <div style="height:10px;"></div>
-
                 <!-- Source Name -->
-                <div id="_sourceName"
-                     style="font-family:Palatino;
-                            font-size: 24px;
-                            color: #343434;">
+                <div id="_sourceName" class="source-name">
                     {{_sourceName}}
                 </div>
 
-                <!-- Spacer -->
-                <div style="height:18px;"></div>
-
                 <!-- Logo Box -->
-                <div class="layout vertical center"
-                     style="width:150px; height: 65px;
-                            border: 1px solid #DEDEDE;
-                            justify-content:center;">
+                <div class="logo-box layout vertical center-center">
 
                     <!-- Logo -->
                     <img
-                            style="width:auto; max-width:100%;"
-                            src="{{_sourceLogoUrl}}">
+                        style="width:auto;"
+                        src="{{_sourceLogoUrl}}"
+                    >
                     </img>
-
                 </div>
 
                 <!-- Optional Note -->
-                <div id="note"
-                     style="font-family:Arial;
-                            font-size: 13px;
-                            margin-top: 9px;
-                            color: #7F7F7F;
-                            display: none;">
+                <div id="note" class="note">
                     {{_sourceNotes}}
                 </div>
 
-                <!-- Spacer -->
-                <div style="height:38px;"></div>
-
                 <!-- Username -->
-                <div class="layout horizontal center">
-
-                    <!-- Label -->
-                    <div style="width:65px;
-                                text-align:right;
-                                font-family: Arial, Helvetica, sans-serif;
-                                font-size: 14px;
-                                font-weight:bold;
-                                color: #343434;">
-                        Username
-                    </div>
-
-                    <!-- Spacer -->
-                    <div style="width:30px;"></div>
-
-                    <!-- Entry field -->
-                    <input id="usernameField"
-                           type="text"
-                           autofocus
-                           on-keyup="_onKeyUp"
-                           value="{{username::input}}"
-                           style="font-family:Arial;
-                                    font-size: 15px;
-                                    width: 350px; height: 28px;
-                                    padding-left: 6px; padding-right: 6px;
-                                    color: #343434;">
-
-                </div>
-
-                <!-- Spacer -->
-                <div style="height:15px;"></div>
+                <paper-input
+                    id="usernameField"
+                    class="username-field"
+                    autofocus
+                    label="Username"
+                    on-keyup="_onKeyUp"
+                    value="{{username}}"
+                >
+                </paper-input>
 
                 <!-- Password -->
-                <div class="layout horizontal center">
-
-                    <!-- Label -->
-                    <div style="width:65px;
-                                text-align:right;
-                                font-family: Arial, Helvetica, sans-serif;
-                                font-size: 14px;
-                                font-weight:bold;
-                                color: #343434;">
-                        Password
-                    </div>
-
-                    <!-- Spacer -->
-                    <div style="width:30px;"></div>
-
-                    <!-- Entry field -->
-                    <input id="passwordField"
-                           type="password"
-                           on-keyup="_onKeyUp"
-                           value="{{password::input}}"
-                           style="font-family:Arial;
-                                    font-size: 15px;
-                                    width: 350px; height: 28px;
-                                    padding-left: 6px; padding-right: 6px;
-                                    color: #343434;">
-
-                </div>
-
-                <!-- Spacer -->
-                <div style="height:14px;"></div>
-
-                <!-- Dividing line -->
-                <hr width="100" style="width:100%; height: 2px; border-width:0; color: #EEEEEE; background-color: #EEEEEE"/>
-
-                <!-- Spacer -->
-                <div style="height:15px;"></div>
+                <paper-input
+                    id="passwordField"
+                    class="password-field"
+                    autofocus
+                    type="password"
+                    label="Password"
+                    on-keyup="_onKeyUp"
+                    value="{{password}}"
+                >
+                </paper-input>
 
                 <!-- Buttons -->
-                <div class="layout horizontal">
+                <div class="button-group layout horizontal">
 
                     <!-- Cancel Button -->
-                    <paper-button dialog-dismiss raised
-                                  id="cancelButton"
-                                  style="font-family:Arial"
-                                  on-tap="_onCancelButtonClicked">
+                    <paper-button
+                        dialog-dismiss raised
+                        id="cancelButton"
+                        class="button"
+                        on-tap="_onCancelButtonClicked"
+                    >
                         Cancel
                     </paper-button>
 
                     <!-- Spacer -->
-                    <div style="width:10px;"></div>
+                    <div class="flex"></div>
 
                     <!-- Connect Button -->
-                    <paper-button dialog-confirm autofocus raised
-                                  id="connectButton"
-                                  disabled$="{{!isValid}}"
-                                  style="font-family:Arial"
-                                  on-tap="_onConnectButtonClicked">
+                    <paper-button
+                        dialog-confirm autofocus raised
+                        id="connectButton"
+                        class="button"
+                        disabled$="{{!isValid}}"
+                        on-tap="_onConnectButtonClicked"
+                    >
                         Connect
                     </paper-button>
 
                 </div>
 
-                <!-- Spacer -->
-                <div style="height:32px;"></div>
-
-                <!-- Informational Links -->
-                <div class="layout horizontal center"
-                     style="width:100%;">
-
-                    <!-- Visit source site -->
-                    <div class="link"
-                         style="font-family:Arial;
-                                font-size: 15px;
-                                color: #3B7FBA;
-                                cursor:pointer;
-                                "
-                         on-tap="_onVisitSourceSiteButtonClicked">
-                        Visit {{_sourceName}} website
-                    </div>
-
-                    <!-- Spacer -->
-                    <div class="flex"></div>
-
-                    <!-- Is this safe? -->
-                    <div class="link"
-                         style="font-family:Arial;
-                                font-size: 15px;
-                                color: #3B7FBA;
-                                cursor:pointer;"
-                         hidden$="[[!showIsThisSafeButton]]"
-                         on-tap="_onIsThisSafeButtonClicked">
-                        Is this safe?
-                    </div>
+                <!-- Visit source site -->
+                <div class="link info-link"
+                     on-tap="_onVisitSourceSiteButtonClicked"
+                >
+                    Visit {{_sourceName}} website
                 </div>
             </div>
-
         </paper-dialog>
-
-
     </template>
 
     <script>
