@@ -45,12 +45,12 @@ An element that accepts username and password to connect to a document source.
                 font-family: Arial, Helvetica, sans-serif;
                 @apply --ft-create-connection-dialog;
             }
-            .dialog {
+            #dialog {
                 width: 500px;
                 height: 400px;
                 @apply --ft-create-connection-dialog-dialog;
             }
-            .content {
+            #content {
                 margin: 0;
                 padding: 0;
                 background-color: white;
@@ -58,34 +58,34 @@ An element that accepts username and password to connect to a document source.
                 height: 100%;
                 @apply --ft-create-connection-dialog-dialog;
             }
-            .prompt {
+            #prompt {
                 margin-top: 20px;
                 font-size: 13px;
                 font-style: italic;
                 color: #343434;
                 @apply --ft-create-connection-dialog-prompt;
             }
-            .source-name {
+            #sourceName {
                 margin-top: 10px;
                 font-size: 24px;
                 color: #343434;
                 @apply --ft-create-connection-dialog-source-name;
             }
-            .logo-box {
+            #logoBox {
                 margin-top: 10px;
                 width: 150px;
                 height: 65px;
                 border: 1px solid #DEDEDE;
                 @apply --ft-create-connection-dialog-logo-box;
             }
-            .note {
+            #note {
                 margin-top: 9px;
                 font-size: 13px;
                 color: #7F7F7F;
                 display: none;
                 @apply --ft-create-connection-dialog-note;
             }
-            .username-field {
+            #usernameField {
                 margin-left: 0;
                 margin-top: 12px;
                 margin-right: 0;
@@ -96,7 +96,7 @@ An element that accepts username and password to connect to a document source.
                 color: #343434;
                 @apply --ft-create-connection-dialog-username-field;
             }
-            .password-field {
+            #passwordField {
                 margin: 0;
                 width: 350px;
                 padding: 0;
@@ -104,15 +104,18 @@ An element that accepts username and password to connect to a document source.
                 color: #343434;
                 @apply --ft-create-connection-dialog-password-field;
             }
-            .button-group {
+            #buttonGroup {
                 margin-top: 20px;
                 width: 200px;
                 @apply --ft-create-connection-dialog-button-group;
             }
-            .button {
-                @apply --ft-create-connection-dialog-button;
+            #cancelButton {
+                @apply --ft-create-connection-dialog-cancel-button;
             }
-            .info-link {
+            #connectButton {
+                @apply --ft-create-connection-dialog-connect-button;
+            }
+            #infoLink {
                 margin-top: 25px;
                 width: 350px;
                 font-size: 15px;
@@ -125,7 +128,6 @@ An element that accepts username and password to connect to a document source.
 
         <paper-dialog
             id="dialog"
-            class="dialog"
             modal
             on-iron-overlay-closed="_onClosed"
         >
@@ -133,21 +135,26 @@ An element that accepts username and password to connect to a document source.
             <!-- Our paper-dialog parent is evil! It apparently injects a margin into its children -->
             <!-- Or if the first child does not have a background color! -->
             <!-- We use a "content" child with an explicitly empty margin to counteract this -->
-            <div class="content layout vertical center">
+            <div
+                id="content"
+                class="layout vertical center"
+            >
 
                 <!-- Prompt -->
-                <iron-label class="prompt">
+                <iron-label id="prompt">
                     Please enter your credentials for
                 </iron-label>
 
                 <!-- Source Name -->
-                <div id="_sourceName" class="source-name">
+                <div id="sourceName">
                     {{_sourceName}}
                 </div>
 
                 <!-- Logo Box -->
-                <div class="logo-box layout vertical center-center">
-
+                <div
+                    id="logoBox"
+                    class="layout vertical center-center"
+                >
                     <!-- Logo -->
                     <img
                         style="width:auto;"
@@ -157,14 +164,13 @@ An element that accepts username and password to connect to a document source.
                 </div>
 
                 <!-- Optional Note -->
-                <div id="note" class="note">
+                <div id="note">
                     {{_sourceNotes}}
                 </div>
 
                 <!-- Username -->
                 <paper-input
                     id="usernameField"
-                    class="username-field"
                     autofocus
                     label="Username"
                     on-keyup="_onKeyUp"
@@ -175,7 +181,6 @@ An element that accepts username and password to connect to a document source.
                 <!-- Password -->
                 <paper-input
                     id="passwordField"
-                    class="password-field"
                     autofocus
                     type="password"
                     label="Password"
@@ -185,13 +190,15 @@ An element that accepts username and password to connect to a document source.
                 </paper-input>
 
                 <!-- Buttons -->
-                <div class="button-group layout horizontal">
+                <div
+                    id="buttonGroup"
+                    class="layout horizontal"
+                >
 
                     <!-- Cancel Button -->
                     <paper-button
-                        dialog-dismiss raised
                         id="cancelButton"
-                        class="button"
+                        dialog-dismiss raised
                         on-tap="_onCancelButtonClicked"
                     >
                         Cancel
@@ -202,9 +209,8 @@ An element that accepts username and password to connect to a document source.
 
                     <!-- Connect Button -->
                     <paper-button
-                        dialog-confirm autofocus raised
                         id="connectButton"
-                        class="button"
+                        dialog-confirm autofocus raised
                         disabled$="{{!isValid}}"
                         on-tap="_onConnectButtonClicked"
                     >
@@ -214,8 +220,10 @@ An element that accepts username and password to connect to a document source.
                 </div>
 
                 <!-- Visit source site -->
-                <div class="link info-link"
-                     on-tap="_onVisitSourceSiteButtonClicked"
+                <div
+                    id="infoLink"
+                    class="link"
+                    on-tap="_onVisitSourceSiteButtonClicked"
                 >
                     Visit {{_sourceName}} website
                 </div>
