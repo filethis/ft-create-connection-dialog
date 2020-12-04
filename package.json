@@ -1,7 +1,7 @@
 {
   "description": "An element that accepts username and password to connect to a document source.",
-  "name": "filethis/ft-create-connection-dialog",
-  "version": "filethis/1.0.28",
+  "name": "ft-create-connection-dialog",
+  "version": "1.0.28",
   "resolutions": {
     "inherits": "2.0.3",
     "samsam": "1.1.3",
