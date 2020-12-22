@@ -1,6 +1,6 @@
 {
   "description": "An element that accepts username and password to connect to a document source.",
-  "name": "ft-create-connection-dialog",
+  "name": "@filethis/ft-create-connection-dialog",
   "version": "1.0.28",
   "resolutions": {
     "inherits": "2.0.3",
@@ -15,7 +15,6 @@
     "*.make",
     "*.png",
     "*.svg",
-    ".yalc/",
     "data/",
     "demo/",
     "test/",
@@ -35,7 +34,7 @@
     "@polymer/paper-dialog": "^3.0.0",
     "@polymer/paper-input": "^3.0.0",
     "@polymer/polymer": "^3.0.0",
-    "ft-element-demo": "file:.yalc/ft-element-demo"
+    "@filethis/ft-element-demo": "^1.0.15"
   },
   "devDependencies": {
     "@polymer/iron-component-page": "^4.0.0",
